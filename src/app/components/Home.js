@@ -7,7 +7,7 @@ export class Home extends React.Component {
         console.log(props);
         this.state = {
             age: props.users.age,
-            headertext:'Hello world!'
+            headertext:props.headertext
             
         }
        // this.increasedate = this.increasedate.bind(this);
@@ -29,11 +29,17 @@ export class Home extends React.Component {
         this.props.onheaderChange(this.state.headertext)
     }
     
+    handleChange(event){
+        this.setState({
+            headertext:event.target.value
+        });
+    }
 
     render() {
         console.log(this.props);
         return (
             <div>
+               <input type="text" value={this.state.headertext} onChange={(event)=>this.handleChange(event)}/>
                <button onClick={this.onchangeheaderCode.bind(this)}>Change header</button>
                 <div>
                     <p><strong>Name: {this.props.users.name}</strong></p>
