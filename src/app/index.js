@@ -6,10 +6,20 @@ import { Home } from "./components/Home";
 class App extends React.Component {
     constructor(props){
         super(props);
-        
+
         this.state={
             header:"Showing user information"            
         }
+    }
+
+    onGreet(){
+        alert("Hello tester!");
+    }
+
+    onChangeHeader(value){
+        this.setState({
+            header:value
+        });
     }
 
     render() {
@@ -25,9 +35,12 @@ class App extends React.Component {
 
         return (
             <div className="container theme-showcase">
-               <Header header={this.state.header}/>
-               <Home users={users}/>
-               <Home />
+               <Header text={this.state.header}/>
+               <Home users={users} 
+               greet={this.onGreet}
+               onheaderChange={this.onChangeHeader.bind(this)}
+               />
+               <Home greet={this.onGreet} onheaderChange={this.onChangeHeader.bind(this)}/>
             </div>
         );
     }

@@ -6,7 +6,9 @@ export class Home extends React.Component {
         super(props);
         console.log(props);
         this.state = {
-            age: props.users.age
+            age: props.users.age,
+            headertext:'Hello world!'
+            
         }
        // this.increasedate = this.increasedate.bind(this);
     }
@@ -17,13 +19,25 @@ export class Home extends React.Component {
         });
     }
 
+    decreasedate(){
+        this.setState({
+            age:this.state.age-1
+        });
+    }
+
+    onchangeheaderCode(){
+        this.props.onheaderChange(this.state.headertext)
+    }
+    
+
     render() {
         console.log(this.props);
         return (
             <div>
+               <button onClick={this.onchangeheaderCode.bind(this)}>Change header</button>
                 <div>
                     <p><strong>Name: {this.props.users.name}</strong></p>
-                    <p>Age: {this.state.age} &nbsp;&nbsp;<input type="button" onClick={() =>this.increasedate()} className="btn btn-lg" value="Increase date" /></p>
+                    <p>Age: {this.state.age} &nbsp;&nbsp;<input type="button" onClick={() =>this.increasedate()} className="btn btn-lg" value="Increase date" />&nbsp;&nbsp;<input type="button" onClick={() =>this.decreasedate()} className="btn btn-lg" value="Decrease date" /></p>
                     <p>Occupation: {this.props.users.occupation}</p>
                     <p>Designation: {this.props.users.designation}</p>
                     <p>Hobbies:
@@ -31,6 +45,7 @@ export class Home extends React.Component {
                             {this.props.users.hobbies.map((hobby, i) => <li key={i}>{hobby}</li>)}
                         </ul>
                     </p>
+                    <p><input type="button" className="btn btn-lg" value="Function call" onClick={this.props.greet}/></p>
                 </div>
             </div>
         );
@@ -38,7 +53,8 @@ export class Home extends React.Component {
 }
 
 Home.PropTypes = {
-    users: React.PropTypes.object
+    users: React.PropTypes.object,
+    greet:React.PropTypes.func
 }
 
 Home.defaultProps = {
