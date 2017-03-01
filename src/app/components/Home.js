@@ -7,31 +7,61 @@ export class Home extends React.Component {
         console.log(props);
         this.state = {
             age: props.users.age,
-            headertext:props.headertext
-            
+            headertext: props.headertext
+
         }
-       // this.increasedate = this.increasedate.bind(this);
+        // this.increasedate = this.increasedate.bind(this);
     }
 
-    increasedate(){
+    
+    componentWillMount() {
+        console.log('Component WILL MOUNT!')
+    }
+
+    componentDidMount() {
+        console.log('Component DID MOUNT!')
+    }
+
+    componentWillReceiveProps(newProps) {
+        console.log('Component WILL RECIEVE PROPS!')
+    }
+
+    shouldComponentUpdate(newProps, newState) {
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('Component WILL UPDATE!');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('Component DID UPDATE!')
+    }
+
+    componentWillUnmount() {
+        console.log('Component WILL UNMOUNT!')
+    }
+
+
+    increasedate() {
         this.setState({
-            age:this.state.age+1
+            age: this.state.age + 1
         });
     }
 
-    decreasedate(){
+    decreasedate() {
         this.setState({
-            age:this.state.age-1
+            age: this.state.age - 1
         });
     }
 
-    onchangeheaderCode(){
+    onchangeheaderCode() {
         this.props.onheaderChange(this.state.headertext)
     }
-    
-    handleChange(event){
+
+    handleChange(event) {
         this.setState({
-            headertext:event.target.value
+            headertext: event.target.value
         });
     }
 
@@ -39,11 +69,11 @@ export class Home extends React.Component {
         console.log(this.props);
         return (
             <div>
-               <input type="text" value={this.state.headertext} onChange={(event)=>this.handleChange(event)}/>
-               <button onClick={this.onchangeheaderCode.bind(this)}>Change header</button>
+                <input type="text" value={this.state.headertext} onChange={(event) => this.handleChange(event)} />
+                <button onClick={this.onchangeheaderCode.bind(this)}>Change header</button>
                 <div>
                     <p><strong>Name: {this.props.users.name}</strong></p>
-                    <p>Age: {this.state.age} &nbsp;&nbsp;<input type="button" onClick={() =>this.increasedate()} className="btn btn-lg" value="Increase date" />&nbsp;&nbsp;<input type="button" onClick={() =>this.decreasedate()} className="btn btn-lg" value="Decrease date" /></p>
+                    <p>Age: {this.state.age} &nbsp;&nbsp;<input type="button" onClick={() => this.increasedate()} className="btn btn-lg" value="Increase date" />&nbsp;&nbsp;<input type="button" onClick={() => this.decreasedate()} className="btn btn-lg" value="Decrease date" /></p>
                     <p>Occupation: {this.props.users.occupation}</p>
                     <p>Designation: {this.props.users.designation}</p>
                     <p>Hobbies:
@@ -51,7 +81,7 @@ export class Home extends React.Component {
                             {this.props.users.hobbies.map((hobby, i) => <li key={i}>{hobby}</li>)}
                         </ul>
                     </p>
-                    <p><input type="button" className="btn btn-lg" value="Function call" onClick={this.props.greet}/></p>
+                    <p><input type="button" className="btn btn-lg" value="Function call" onClick={this.props.greet} /></p>
                 </div>
             </div>
         );
@@ -60,7 +90,7 @@ export class Home extends React.Component {
 
 Home.PropTypes = {
     users: React.PropTypes.object,
-    greet:React.PropTypes.func
+    greet: React.PropTypes.func
 }
 
 Home.defaultProps = {
